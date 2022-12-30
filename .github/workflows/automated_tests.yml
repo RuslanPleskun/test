@@ -1,12 +1,8 @@
 name: automated tests
 on:
   workflow_dispatch:
-    inputs:
-      chrome-version:
-        default: latest
-        required: false
 jobs:
-  run_tests:
+  run-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -22,5 +18,9 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+      - name: Install Google Chrome
+        run:  |
+          chmod +x ./scripts/InstallChrome.sh
+                      ./scripts/InstallChrome.sh
       - name: Run automated tests with Maven
         run: mvn -B package --file pom.xml
