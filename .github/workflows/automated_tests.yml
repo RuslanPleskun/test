@@ -23,4 +23,4 @@ jobs:
           chmod +x ./scripts/InstallChrome.sh
                       ./scripts/InstallChrome.sh
       - name: Run automated tests with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn test --file pom.xml
