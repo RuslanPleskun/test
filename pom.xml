@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <!-- - - - - - Default xml file to run - - - - -->
-        <xml.file>smoke-testsuite.xml</xml.file>
+        <xml.file>testsuite.xml</xml.file>
     </properties>
 
     <dependencies>
