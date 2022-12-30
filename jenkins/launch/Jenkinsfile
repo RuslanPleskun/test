@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    parameters {
+        booleanParam(defaultValue: false, description: "Confirm deployment?", name: "deploymentState")
+    }
+    stages {
+        stage("Demo") {
+            steps {
+                script {
+                    if(params.deploymentState == false) {
+                        currentBuild.result = "SUCCESS"
+                        sleep(10)
+                        return
+                    }
+                    else {
+                        echo "booleanParam is set to: ${params.deploymentState}"
+                    }
+                }
+            }
+        }
+    }
+}

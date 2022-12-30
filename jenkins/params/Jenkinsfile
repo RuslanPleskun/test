@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    parameters {
+        string(defaultValue: "", description: "Provide custom deployment name", name: "deploymentName")
+        choice(choices: ["EU-WEST-2A", "EU-WEST-2B", "EU-WEST-2C"], description: "Which AZ to deploy to?", name: "region")
+        booleanParam(defaultValue: false, description: "Confirm deployment?", name: "deploymentState")
+    }
+    stages {
+        stage("Demo") {
+            steps {
+                echo "Deployment name is: ${params.deploymentName}"
+                echo "AZ is set to: ${params.region}"
+                echo "Confirm deployment: ${params.deploymentState}"
+            }
+        }
+    }
+}

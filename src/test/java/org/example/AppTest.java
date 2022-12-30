@@ -1,38 +1,49 @@
 package org.example;
 
-import junit.framework.Test;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+import java.time.Duration;
+
+public class AppTest extends TestCase {
+    private WebDriver driver;
+    private static final String BASE_URL = "https://www.google.com/";
+    private static final Long IMPLICITLY_WAIT_SECONDS = 5L;
+    private static final Long ONE_SECOND_DELAY = 1000L;
+    private static final String INPUT_FIELD = "//input[@class='gLFyf']";
+    private static final String TEXT_LOCATOR = "//h2[@class='qrShPb kno-ecr-pt PZPZlf q8U8x']";
+    private static final String EXPECTED_RESULT = "Stack Overflow";
+
+    @BeforeClass
+    public void beforeClass() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT_SECONDS));
+        driver.navigate().to(BASE_URL);
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @Test
+    public void testMethod() {
+
+        driver.findElement(By.xpath(INPUT_FIELD)).click();
+        driver.findElement(By.xpath(INPUT_FIELD)).clear();
+        driver.findElement(By.xpath(INPUT_FIELD)).sendKeys(EXPECTED_RESULT + Keys.ENTER);
+        String actual = driver.findElement(By.xpath(TEXT_LOCATOR)).getText();
+        Assert.assertEquals(EXPECTED_RESULT, actual);
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @AfterClass
+    public void afterClass() {
+        driver.quit();
     }
 }
