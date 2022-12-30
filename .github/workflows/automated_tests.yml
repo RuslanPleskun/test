@@ -22,6 +22,5 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name:
       - name: Run automated tests with Maven
         run: mvn -B package --file pom.xml
