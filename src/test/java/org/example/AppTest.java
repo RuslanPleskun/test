@@ -16,12 +16,12 @@ import java.time.Duration;
 
 public class AppTest extends TestCase {
     private WebDriver driver;
-    private static final String BASE_URL = "https://www.google.com/";
+    private static final String BASE_URL = "https://www.selenium.dev/";
     private static final Long IMPLICITLY_WAIT_SECONDS = 5L;
     private static final Long ONE_SECOND_DELAY = 1000L;
-    private static final String INPUT_FIELD = "//input[@class='gLFyf']";
-    private static final String TEXT_LOCATOR = "//h2[@class='qrShPb kno-ecr-pt PZPZlf q8U8x']/span";
-    private static final String EXPECTED_RESULT = "Stack Overflow";
+    //private static final String INPUT_FIELD = "//input[@class='gLFyf']";
+    private static final String TEXT_LOCATOR = "#selenium_logo title";
+    private static final String EXPECTED_RESULT = "Selenium";
 
     @BeforeClass
     public void beforeClass() {
@@ -44,10 +44,11 @@ public class AppTest extends TestCase {
     @Test
     public void testMethod() {
 
-        driver.findElement(By.xpath(INPUT_FIELD)).click();
-        driver.findElement(By.xpath(INPUT_FIELD)).clear();
-        driver.findElement(By.xpath(INPUT_FIELD)).sendKeys(EXPECTED_RESULT + Keys.ENTER);
-        String actual = driver.findElement(By.xpath(TEXT_LOCATOR)).getText();
+//        driver.findElement(By.xpath(INPUT_FIELD)).click();
+//        driver.findElement(By.xpath(INPUT_FIELD)).clear();
+//        driver.findElement(By.xpath(INPUT_FIELD)).sendKeys(EXPECTED_RESULT + Keys.ENTER);
+        //driver.findElement(By.cssSelector("a[data-ved='2ahUKEwimqMvizKP8AhWLl4sKHfR7AJUQFnoECAoQAQ'] h3")).click();
+        String actual = driver.findElement(By.cssSelector(TEXT_LOCATOR)).getText();
         Assert.assertTrue(actual.contains(EXPECTED_RESULT));
     }
 
