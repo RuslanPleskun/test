@@ -37,6 +37,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Run automated tests with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn test --file pom.xml
         env:
           BROWSER: ${{ github.event.inputs.browser }}
