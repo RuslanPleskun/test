@@ -20,7 +20,7 @@ jobs:
 
     services:
       selenium:
-        image: selenium/standalone-${{ github.event.inputs.browser }}
+        image: docker run -d -p 4444:4444 --shm-size="2g" selenium/standalone-chrome:4.7.2-20221219
 
     steps:
       - name: Checkout the repository
@@ -37,6 +37,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Run automated tests with Maven
-        run: mvn test --file pom.xml
+        run: mvn -B package --file pom.xml
         env:
-          BROWSER: ${{ github.event.inputs.browser }}
+          BROWSER: chrome
