@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: node:16
+      image: docker pull selenium/standalone-chrome
 
     services:
       selenium:
-        image: selenium/standalone-chrome:4.7.2-20221219
+        image: docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" selenium/standalone-chrome
 
     steps:
       - name: Checkout the repository
