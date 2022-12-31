@@ -20,7 +20,7 @@ public class AppTest extends TestCase {
     private static final Long IMPLICITLY_WAIT_SECONDS = 5L;
     private static final Long ONE_SECOND_DELAY = 1000L;
     private static final String INPUT_FIELD = "//input[@class='gLFyf']";
-    private static final String TEXT_LOCATOR = "//h2[@class='qrShPb kno-ecr-pt PZPZlf q8U8x']";
+    private static final String TEXT_LOCATOR = "//h2[@class='qrShPb kno-ecr-pt PZPZlf q8U8x']/span";
     private static final String EXPECTED_RESULT = "Stack Overflow";
 
     @BeforeClass
@@ -48,7 +48,7 @@ public class AppTest extends TestCase {
         driver.findElement(By.xpath(INPUT_FIELD)).clear();
         driver.findElement(By.xpath(INPUT_FIELD)).sendKeys(EXPECTED_RESULT + Keys.ENTER);
         String actual = driver.findElement(By.xpath(TEXT_LOCATOR)).getText();
-        Assert.assertEquals(EXPECTED_RESULT, actual);
+        Assert.assertTrue(actual.contains(EXPECTED_RESULT));
     }
 
     @AfterClass
