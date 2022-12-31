@@ -1,9 +1,27 @@
 name: automated tests
 on:
   workflow_dispatch:
+    inputs:
+      browser:
+        type: choice
+        description: Which browser to run tests on
+        required: true
+        options:
+          - chrome
+          - firefox
+          - edge
+
 jobs:
-  run-tests:
+  run_tests:
     runs-on: ubuntu-latest
+
+    container:
+      image: node:16
+
+    services:
+      selenium:
+        image: selenium/standalone-${{ github.event.inputs.browser }}
+
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
@@ -18,9 +36,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Install Google Chrome
-        run:  |
-          chmod +x ./scripts/InstallChrome.sh
-                      ./scripts/InstallChrome.sh
       - name: Run automated tests with Maven
-        run: mvn test --file pom.xml
+        run: mvn -B package --file pom.xml
+        env:
+          BROWSER: ${{ github.event.inputs.browser }}
