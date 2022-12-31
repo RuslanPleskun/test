@@ -27,13 +27,13 @@ public class AppTest extends TestCase {
     public void beforeClass() {
         WebDriverManager.chromedriver().setup();        // download the latest webDriver
         ChromeOptions options = new ChromeOptions();    // initialize driver instance
-        //options.addArguments("--window-size=1920,1080");// set window size
-        //options.addArguments("--start-maximized");      // start maximized screen
+        options.addArguments("--window-size=1920,1080");// set window size
+        options.addArguments("--start-maximized");      // start maximized screen
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");             // run in headless mode
-        //options.addArguments("--no-proxy-server");      // cno proxy server
-        //options.addArguments("--ignore-certificate-errors");    // ignore-certificate-errors
+        options.addArguments("--no-proxy-server");      // cno proxy server
+        options.addArguments("--ignore-certificate-errors");    // ignore-certificate-errors
         driver = new ChromeDriver(options);
 
         driver.manage().window().maximize();
