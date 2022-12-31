@@ -22,7 +22,7 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Install Google Chrome
         run: |
-          chmod +x ./scripts/InstallChrome.sh
-                      ./scripts/InstallChrome.sh
+          chmod +x ./scripts/install_chrome.sh
+                      ./scripts/install_chrome.sh
       - name: Run automated tests with Maven
         run: mvn -B package --file pom.xml
