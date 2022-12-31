@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -24,8 +25,16 @@ public class AppTest extends TestCase {
 
     @BeforeClass
     public void beforeClass() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup();        // download the latest webDriver
+        ChromeOptions options = new ChromeOptions();    // initialize driver instance
+        //options.addArguments("--window-size=1920,1080");// set window size
+        //options.addArguments("--start-maximized");      // start maximized screen
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--headless");             // run in headless mode
+        //options.addArguments("--no-proxy-server");      // cno proxy server
+        //options.addArguments("--ignore-certificate-errors");    // ignore-certificate-errors
+        driver = new ChromeDriver(options);
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT_SECONDS));
