@@ -21,8 +21,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Install Google Chrome
-        run: |
-          chmod +x ./scripts/install_chrome.sh
-                      ./scripts/install_chrome.sh
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: beta
+        run: chrome --version
+#        run: |
+#          chmod +x ./scripts/install_chrome.sh
+#                      ./scripts/install_chrome.sh
       - name: Run automated tests with Maven
         run: mvn -B package --file pom.xml
