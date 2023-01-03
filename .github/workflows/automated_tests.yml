@@ -21,10 +21,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Install Google Chrome
-        uses: browser-actions/setup-chrome@latest
+      - uses: browser-actions/setup-chrome@latest
         with:
           chrome-version: beta
-        run: chrome --version
+      - run: chrome --version
 #        run: |
 #          chmod +x ./scripts/install_chrome.sh
 #                      ./scripts/install_chrome.sh
